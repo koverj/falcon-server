@@ -1,16 +1,6 @@
-# Express.js + TypeScript + Docker example
+# Koverj server
 
-This example demonstrates how to build an Express.js application using TypeScript, and how to wrap the app into Docker container.
-
-## Application dependencies
-
-- [Express.js](https://expressjs.com)
-- [TypeScript](https://www.typescriptlang.org)
-
-## Environment dependencies
-
-- [Node.js](nodejs.org)
-- [Docker](https://store.docker.com/search?offering=community&type=edition) (optional)
+Server for locators
 
 ## Usage
 
@@ -19,3 +9,22 @@ This example demonstrates how to build an Express.js application using TypeScrip
 - `npm start`: start production server running the compiled app in ./lib
 - `npm run build:docker`: build Docker container image
 - `npm run start:docker`: launch Docker container using the image
+
+
+Accepts:
+
+```
+{
+  "buildId": 'a601ff0c-925b-4e06-beef-3882a628bdf7',
+  "testName": "testTodoDeletedIfEmptyName()",
+  "locators": [
+    {
+      "url": "http://todomvc.com/examples/typescript-angular/#/",
+      "locator": "body > section > header > form > input"
+    }
+   ]
+}
+```
+
+url -  required
+locator - required
