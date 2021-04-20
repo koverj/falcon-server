@@ -37,10 +37,15 @@
 		"test": "cross-env NODE_ENV=test mocha --recursive lib/test"
 	},
 	"dependencies": {
+		"@types/uuid": "^8.3.0",
 		"body-parser": "^1.18.2",
 		"cross-env": "^5.1.1",
 		"express": "^4.16.2",
 		"morgan": "^1.9.0",
+		"route-node": "^4.1.1",
+		"sqlite3": "^5.0.2",
+		"typeorm": "^0.2.32",
+		"uuid": "^8.3.2",
 		"winston": "^2.4.0"
 	},
 	"devDependencies": {

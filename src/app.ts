@@ -1,7 +1,7 @@
 import { Server } from 'server';
+import { connection } from './connection';
 
 const app = new Server;
-app.start();
-const log = app.log;
-
-export { app, log };
+connection.then(async conn => {
+    app.start();
+})

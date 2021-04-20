@@ -9,10 +9,11 @@
 		"rootDir": "src",
 		"sourceMap": true,
 		"target": "es2017",
-
 		"alwaysStrict": true,
+		"experimentalDecorators":true,
+		"emitDecoratorMetadata": true,
 		"noFallthroughCasesInSwitch": true,
-		"noImplicitAny": true,
+		"noImplicitAny": false,
 		"noImplicitReturns": true,
 		"noImplicitThis": true,
 		"noUnusedLocals": true,
