@@ -23,7 +23,7 @@ export const saveLocators = async (req: Express.Request, res: Express.Response) 
     if (!build) {
       await buildService.saveBuild(buildData)
     } else {
-      build.locatorResults.push(locatorResults);
+      build.locatorResults.push(...locatorResults);
       await buildService.saveBuild(build);
     }
 
