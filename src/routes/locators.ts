@@ -1,5 +1,3 @@
-import { LocatorResult } from '../entity/locator.result';
-import { Locator } from '../entity/locator';
 import * as buildService from '../service/build.service';
 import * as locatorsService from '../service/locators.service';
 import * as urlService from '../service/url.pattern.service';
@@ -7,28 +5,28 @@ import * as Express from 'express';
 import { isXpath, processLocator, addUniqueToArray, matchUrl } from '../utils';
 import { v4 as uuidv4 } from 'uuid';
 
-export const saveLocators = async (req: Express.Request, res: Express.Response) => {
+export const saveLocators = async (req: Express.Request, res: Express.Response) => {  
+    
     const buildId = req.body.buildId || uuidv4();
-    const testName = req.body.testName as string;
-    const locators = req.body.locators as Locator[];
-  
-    const locatorResult = new LocatorResult();
-    locatorResult.testName = testName;
-    locatorResult.locators = locators;
-  
     const build = await buildService.getBuildByParams({ name: buildId });
-  
+    
+    const tests = req.body.tests
+    const locatorResults = tests.map(t => {
+         return { testName: t.testName, locators: t.locators}
+    })
+
+    const buildData = {
+      name: buildId,
+      locatorResults
+    }
+
     if (!build) {
-      const locatorResults = [locatorResult];
-      await buildService.saveBuild({
-        name: buildId,
-        locatorResults,
-      });
+      await buildService.saveBuild(buildData)
     } else {
-      build.locatorResults.push(locatorResult);
+      build.locatorResults.push(locatorResults);
       await buildService.saveBuild(build);
     }
-  
+
     res.json({ status: 'saved' });
   };
 
