@@ -1,16 +1,12 @@
-FROM node:8.9.1-alpine
+FROM node:14.14.0-alpine3.12
 
-RUN mkdir -p /opt/app
+COPY . ./app
 
-COPY . /opt/app
+WORKDIR /app
 
-WORKDIR /opt/app
+RUN ["chmod", "+x", "/usr/local/bin/docker-entrypoint.sh"]
+RUN npm install && npm run build
 
-RUN apk add --no-cache --virtual build-deps \
-			python=2.7.13-r1 \
-			make=4.2.1-r0 \
-			g++=6.3.0-r4 \
-	&& npm rebuild \
-	&& apk del build-deps
+EXPOSE 8086
 
-CMD ["npm", "start"]
+CMD ["npm", "run", "start"]

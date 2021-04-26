@@ -2,6 +2,6 @@
   "type": "sqlite",
   "database": "./data/locators.sqlite",
   "logging": true,
-  "entities": ["src/entity/*.ts"],
+  "entities": ["./build/entity/*.js"],
   "synchronize": true
 }
