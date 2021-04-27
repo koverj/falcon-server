@@ -1,4 +1,4 @@
-import { UrlPattern } from '../entity/url_pattern';
+import { UrlPattern } from '../entity/url.pattern';
 import * as urlPatternrepo from '../repository/url.pattern.repo';
 
 export const saveUrlPattern = async (pattern: UrlPattern) => {
