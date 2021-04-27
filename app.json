@@ -1,0 +1,9 @@
+{
+  "name": "Koverj Falcon",
+  "description": "Coverage tool for e2e UI tests",
+  "repository": "https://github.com/koverj/falcon-server",
+  "logo": "https://cdn.rawgit.com/heroku/node-js-getting-started/main/public/node.svg",
+  "keywords": ["node", "express", "heroku"],
+  "stack": "container",
+  "success_url": "/"
+}
