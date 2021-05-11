@@ -19,7 +19,7 @@
 					</ul>
 				</div>
 				<div class="col-9">
-					<div id='test-list' class="accordion accordion-flush" id="accordionFlushExample">	
+					<div id='test-list' class="accordion accordion-flush mb-5 mt-5" id="accordionFlushExample">	
 					</div>
 				</div>
 			</div>
@@ -30,8 +30,8 @@
 			$.get( "/builds", function( data ) {
 				data.forEach(element => {
 					$('#build-list').append(`<li class="list-group-item build-item">
-					  <input id='${element.name}'class="form-check-input me-1" type="checkbox" value="">
-					  ${element.id}
+					  <input id='${element.id}'class="form-check-input me-1" type="checkbox" value="">
+					  Build: ${element.id}
 					</li>`)
 				});
 			});
