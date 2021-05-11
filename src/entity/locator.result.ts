@@ -19,14 +19,14 @@ export class LocatorResult {
   @OneToMany(
     type => Locator,
     locator => locator.locatorResult,
-    { onDelete: 'CASCADE' }
+    { onDelete: 'CASCADE', cascade: true }
   )
   locators: Locator[];
 
   @ManyToOne(
     type => Build,
     build => build.locatorResults,
-    { onDelete: 'CASCADE' }
+    { onDelete: 'CASCADE'}
   )
   build: Build;
 }

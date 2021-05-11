@@ -12,7 +12,7 @@ export class Build {
   @OneToMany(
     type => LocatorResult,
     locator => locator.build,
-    { onDelete: 'CASCADE' }
+    { onDelete: 'CASCADE', cascade: true }
   )
   locatorResults: LocatorResult[];
 }

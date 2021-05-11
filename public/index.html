@@ -13,11 +13,14 @@
 		<div class="container-fluid">
 			<h1>Koverj</h1>
 			<div class="row">
-				
 				<div class="col-3">
-				  <button id='delete-build' type="button" class="btn btn-danger btn-sm mb-3">Delete</button>
-				  <ul id='build-list' class="list-group">
-				  </ul>
+				  	<button id='delete-build' type="button" class="btn btn-danger btn-sm mb-3">Delete</button>
+					<ul id='build-list' class="list-group">
+					</ul>
+				</div>
+				<div class="col-9">
+					<div id='test-list' class="accordion accordion-flush" id="accordionFlushExample">	
+					</div>
 				</div>
 			</div>
 		</div>
@@ -26,7 +29,7 @@
 		$( document ).ready(function() {
 			$.get( "/builds", function( data ) {
 				data.forEach(element => {
-					$('#build-list').append(`<li class="list-group-item">
+					$('#build-list').append(`<li class="list-group-item build-item">
 					  <input id='${element.name}'class="form-check-input me-1" type="checkbox" value="">
 					  ${element.id}
 					</li>`)
@@ -55,6 +58,52 @@
 				});
 			});
 
+			function makeid(length) {
+				var result           = [];
+				var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+				var charactersLength = characters.length;
+				for ( var i = 0; i < length; i++ ) {
+					result.push(characters.charAt(Math.floor(Math.random() * 
+					charactersLength)));
+				}
+				return result.join('').toLowerCase();
+			}
+
+			$(document).on('click', "li.build-item", function (e) {
+				const value = $($(this).children()[0]).attr("id")
+				$.get(`/locators?buildId=${value}`, function( data ) {
+					data.forEach(element => {
+
+						const locatorList = []
+						element.locators.forEach(l => {
+							locatorList.push(`
+							<li class="list-group-item">
+								<a href="${l.url}">${l.url}</a> -> ${l.locator}
+							</li>
+							`)
+						})
+
+						const uid = makeid(7);
+
+						$('#test-list').append(
+						`<div class="accordion-item">
+						  <h2 class="accordion-header" id="flush-heading-${element.id}">
+							<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#${uid}" aria-expanded="false" aria-controls="${uid}">
+							  ${element.testName}
+							</button>
+						  </h2>
+						  <div id="${uid}" class="accordion-collapse collapse" aria-labelledby="${uid}" data-bs-parent="#accordionFlushExample">
+							<div class="accordion-body">
+								<ul class="list-group list-group-flush">
+									${locatorList.join('\n')}
+								</ul>
+							</div>
+						  </div>
+						</div>`);
+					});
+					
+				});
+			});
 
 			
 		});
