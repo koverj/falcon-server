@@ -16,3 +16,7 @@ export const findByParams = async (params: object) => {
     relations: ['locatorResults', 'locatorResults.locators'],
   });
 };
+
+export const deleteBuilds = async (builds: Build[]) => {
+  return await buildRepository().remove(builds);
+};

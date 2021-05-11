@@ -20,7 +20,8 @@ export class Locator {
 
   @ManyToOne(
     type => LocatorResult,
-    locatorResult => locatorResult.locators
+    locatorResult => locatorResult.locators,
+    { onDelete: 'CASCADE' }
   )
   locatorResult: LocatorResult;
 }

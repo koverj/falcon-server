@@ -12,3 +12,9 @@ export const createBuild = async (req: Express.Request, res: Express.Response) =
   export const getBuildByParams = async (req: Express.Request, res: Express.Response) => {
     res.json(await buildService.getBuildByParams(req.query));
   };
+
+  export const deleteBuild = async (req: Express.Request, res: Express.Response) => {
+    const ids = req.body
+    await buildService.deleteBuilds(ids)
+    res.json({});
+  }

@@ -43,16 +43,17 @@ export const saveLocators = async (req: Express.Request, res: Express.Response) 
   
     const data: any = {};
   
-    let tests = await locatorsService.getAllLocatorsForBuildByUrl(url, buildId);
-
     if(!url) {
-      tests = await locatorsService.getAllLocatorsForBuild(buildId);
+      const locators = await locatorsService.getAllLocatorsForBuild(buildId);
+      res.json(locators);
     }
 
     if(!url && !buildId){
        const locators =  await locatorsService.getAllLocators();
        res.json(locators);
     }
+    
+    let tests = await locatorsService.getAllLocatorsForBuildByUrl(url, buildId);
 
     tests.forEach((test: any) => {
       test.locators.forEach((l: any) => {
