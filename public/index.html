@@ -31,13 +31,18 @@
 				data.forEach(element => {
 					$('#build-list').append(`<li class="list-group-item build-item">
 					  <input id='${element.id}'class="form-check-input me-1" type="checkbox" value="">
-					  Build: #${element.name}
+					  <span class='buildName'>Build: #${element.name}</span>
 					</li>`)
 				});
 			});
 
 			$(document).on('click', "input[type='checkbox']", function (e) {
-				$(this).prop('checked', true);
+				const prop = $(this).prop('checked')
+				if (prop){
+					$(this).prop('checked', true);
+				} else {
+					$(this).prop('checked', false);
+				}
 			});
 
 			$(document).on('click', "#delete-build", function (e) {
@@ -69,11 +74,10 @@
 				return result.join('').toLowerCase();
 			}
 
-			$(document).on('click', "li.build-item", function (e) {
-				const value = $($(this).children()[0]).attr("id")
+			$(document).on('click', "span.buildName", function (e) {
+				const value = $($(this).prev()).attr("id")
 				$.get(`/locators?buildId=${value}`, function( data ) {
 					data.forEach(element => {
-
 						const locatorList = []
 						element.locators.forEach(l => {
 							locatorList.push(`
@@ -101,11 +105,8 @@
 						  </div>
 						</div>`);
 					});
-					
 				});
 			});
-
-			
 		});
 	</script>
 </html>

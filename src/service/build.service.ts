@@ -16,7 +16,7 @@ export const getBuildByParams = async (params: object) => {
 export const  deleteBuilds = async (ids: string[]) => {
   const builds: Build[] = [] 
   for (const id of ids){
-    const build = await getBuildByParams({name: id})
+    const build = await getBuildByParams({id: id})
     if(build){
       builds.push(build)
     }
